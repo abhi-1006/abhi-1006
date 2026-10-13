@@ -1,10 +1,11 @@
-<h1 align="center">Hi, I'm Abhiram 👋</h1>
+<h1 align="center">Hi, I'm Abhiram Aedunoothala 👋</h1>
 
 <p align="center">
   <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1200&color=F7B731&center=true&vCenter=true&width=620&lines=CS+student+%40+University+of+Michigan;Building+agentic+AI+with+LangGraph+%2B+RAG;Shipping+cross-platform+apps+in+React+Native" alt="Typing intro" />
 </p>
 
 <p align="center">
+  <a href="https://abhiram-aedunoothala.vercel.app"><img src="https://img.shields.io/badge/Website-abhiram--aedunoothala-F7B731?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Personal website" /></a>
   <a href="https://www.linkedin.com/in/abhiram-aedunoothala"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
   <a href="mailto:avsabhiram1006@gmail.com"><img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>
   <a href="https://focztrek.vercel.app"><img src="https://img.shields.io/badge/Live_demo-FoczTrek-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="FoczTrek live demo" /></a>
@@ -152,6 +153,7 @@ Started during a research internship with **Duke University (Dr. Eric Fouh)**, t
 
 <p align="center">
   <i>Open to software engineering and AI internships. Let's talk!</i><br><br>
+  <a href="https://abhiram-aedunoothala.vercel.app">Website</a> ·
   <a href="https://www.linkedin.com/in/abhiram-aedunoothala">LinkedIn</a> ·
   <a href="mailto:avsabhiram1006@gmail.com">Email</a> ·
   <a href="https://focztrek.vercel.app">FoczTrek demo</a>
