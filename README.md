@@ -1,123 +1,102 @@
 <h1 align="center">Hi, I'm Abhiram Aedunoothala 👋</h1>
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1200&color=F7B731&center=true&vCenter=true&width=620&lines=CS+student+%40+University+of+Michigan;Building+agentic+AI+with+LangGraph+%2B+RAG;Shipping+cross-platform+apps+in+React+Native" alt="Typing intro" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1200&color=F7B731&center=true&vCenter=true&width=640&lines=AI+engineering+%C2%B7+CS+%40+University+of+Michigan;Building+agentic+systems+with+LangGraph;RAG+%C2%B7+Multi-agent+%C2%B7+LLM+evaluation" alt="Typing intro" />
 </p>
 
 <p align="center">
-  <a href="https://abhiram-aedunoothala.vercel.app"><img src="https://img.shields.io/badge/Website-abhiram--aedunoothala-F7B731?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Personal website" /></a>
   <a href="https://www.linkedin.com/in/abhiram-aedunoothala"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
   <a href="mailto:avsabhiram1006@gmail.com"><img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>
-  <a href="https://focztrek.vercel.app"><img src="https://img.shields.io/badge/Live_demo-FoczTrek-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="FoczTrek live demo" /></a>
 </p>
 
 ---
 
 ### 🧭 About me
 
+- 🤖 I build **agentic AI systems**: LangGraph workflows, hybrid RAG, multi-agent review, and the evaluation and guardrails that make them trustworthy
 - 🎓 **Computer Science at the University of Michigan** (2026–2029), transferred from Penn State (GPA 3.7, Dean's List, President Walker Award)
-- 🤖 Building **agentic AI systems**: LangGraph workflows, hybrid RAG, multi-agent review, LLM evaluation
-- 📱 Building **cross-platform apps** with React Native, TypeScript and Expo
+- 📜 Applied AI Professional Certification, **IIT Hyderabad** (2026)
 - 🧑‍🏫 Learning Assistant for MATH 110 at Penn State
 - 🏸 Competitive badminton player, state and national level in India
 
 ---
 
-### 🚀 Featured projects
+### 🌟 Spotlight: [WealthPilot](https://github.com/abhi-1006/wealthpilot)
 
-<table>
-<tr>
-<td width="50%" valign="top">
+**An AI copilot for SME loan underwriting** · IIT Hyderabad Applied AI capstone · Jun–Aug 2026
 
-#### 🏦 [WealthPilot](https://github.com/abhi-1006/wealthpilot)
-**SME loan underwriting & credit research assistant**
-<sub>IIT Hyderabad Applied AI capstone · 2026</sub>
+WealthPilot parses raw small-business loan applications, scores risk with a tool-calling agent, answers credit-policy questions with cited sources, pauses risky decisions for a human, and has every memo checked by a review committee. In regulated lending, two failures matter most: **using a protected attribute** and **fabricating a policy citation**. The system is built and evaluated around preventing both.
 
-An agentic system that parses loan applications, scores risk with a tool-calling agent, answers policy questions with RAG, and routes decisions through a human approval gate and a multi-agent review committee.
+```mermaid
+flowchart TB
+    subgraph UW["① Underwriting workflow · LangGraph"]
+        direction LR
+        A[Loan application] --> B["Parse & verify<br/>LLM + Pydantic"]
+        B --> C["Risk agent<br/>DSCR · bureau · bank tools"]
+        C --> E{Route}
+        E --> F[Auto-decline]
+        E --> G["Human approval<br/>interrupt + checkpoint"]
+        E -. request more info .-> B
+    end
+    subgraph CM["② Review committee"]
+        direction LR
+        MCP[("Bureau data<br/>via MCP")] --> H["LLM Analyst<br/>writes memo"]
+        H --> R["Risk + Compliance reviewers<br/>deterministic checks"]
+        R -. revise / escalate .-> H
+    end
+    subgraph QA["③ Policy Q&A"]
+        direction LR
+        K[Question] --> L["Hybrid RAG<br/>Qdrant + BM25 + rerank"]
+        L --> M[Answer with citations]
+        M --> API["FastAPI + guardrails"]
+    end
+    UW ~~~ CM ~~~ QA
+```
 
-`Python` `LangGraph` `RAG` `Qdrant` `MCP` `FastAPI` `Langfuse`
-
-</td>
-<td width="50%" valign="top">
-
-#### 🏔️ [FoczTrek](https://github.com/abhi-1006/FoczTrek) · [Live ↗](https://focztrek.vercel.app)
-**Student productivity app**
-<sub>Duke University research project · 2024–25, rebuilt 2026</sub>
-
-Plan with the Eisenhower Matrix, learn why you procrastinate, then work through Pomodoro focus sessions while a hiker climbs the mountain. Points, streaks and ranks keep you coming back.
-
-`TypeScript` `React Native` `Expo Router` `React Native Web` `Jest`
-
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-
-#### 💡 [Distraction-Free Study Lamp](https://github.com/abhi-1006/Distraction-Free-Study-Lamp)
-**Hardware focus timer**
-<sub>2025</sub>
-
-Two Micro:bits talk over radio: one runs a Pomodoro timer, the other uses its light sensor to notice when you pick up your phone, and the timer pauses until you put it back.
-
-`MicroPython` `Micro:bit` `Radio` `3D printing`
-
-</td>
-<td width="50%" valign="top">
-
-#### ✨ What ties them together
-I like building tools that help people **focus and decide better**, from a study lamp to a focus app to an AI assistant that helps lenders make careful, explainable credit decisions.
-
-</td>
-</tr>
-</table>
-
-<details>
-<summary><b>🔍 WealthPilot: how it works and results</b> (click to expand)</summary>
-<br>
-
-| Piece | What it does |
+| What I built | Why it matters |
 |---|---|
-| Intake | LLM parses raw applications into validated Pydantic models, with a repair loop for malformed output |
-| Risk agent | Tool-calling agent that scores applicant risk |
-| Policy RAG | Gemini embeddings in Qdrant + BM25 hybrid search + RRF fusion + cross-encoder reranking; answers must cite their sources |
-| Workflow | LangGraph with a real `interrupt()` human approval gate and a durable SQLite checkpointer (resumes a paused run from disk) |
-| Committee | An LLM analyst writes the memo; deterministic risk and compliance critics check it, with enforced per-agent write scopes. Credit-bureau data comes from an MCP server |
-| Reliability | Langfuse tracing, retries with fallback, and a circuit breaker, tested under seeded fault injection |
+| **Hybrid RAG**: Gemini embeddings in Qdrant + BM25, RRF fusion, cross-encoder reranking, prompted to cite sources | Answers point to the actual policy clause instead of inventing one |
+| **LangGraph workflow** with a real `interrupt()` human gate and a durable SQLite checkpointer | A paused approval survives a restart. Verified by resuming from disk with a fresh connection and graph |
+| **Multi-agent committee**: LLM analyst + deterministic risk and compliance critics with enforced per-agent write scopes | Critics can't edit the memo they're checking, so the checks stay independent |
+| **MCP server** for credit-bureau data | Tools are exposed through a standard protocol instead of hard-wired calls |
+| **Reliability**: retries with backoff, a fallback path, and a circuit breaker, under seeded fault injection; Langfuse tracing | A flaky dependency degrades gracefully, and every decision can be traced |
+| **Evaluation & guardrails**: a 20-item golden set, three independent LLM-judge frameworks, and schema, prompt-injection and protected-attribute checks behind FastAPI | Quality is measured, not assumed |
 
 **Results**
-- Retrieval MRR **0.74 → 1.00** (dense → hybrid → hybrid + rerank) on a 10-question test set
-- **19/20** on the policy golden evaluation set (started at 6/20; two real bugs found and fixed)
-- **1.0** on faithfulness and groundedness across three LLM-judge frameworks (Ragas, DeepEval, TruLens)
-- Under seeded fault injection, valid credit-bureau lookups rose **45% → 85%** with retries; the rest fell back to a flagged record instead of crashing
 
-</details>
+| Metric | Result |
+|---|---|
+| Retrieval MRR (dense → hybrid → hybrid + rerank) | **0.74 → 0.82 → 1.00** |
+| Policy golden set | **19/20** (started at 6/20; two real bugs found and fixed) |
+| Faithfulness / groundedness (Ragas, TruLens) | **1.0 / 1.0** |
+| Valid credit-bureau lookups under fault injection | **45% → 85%** with retries; the rest fall back to a flagged record instead of crashing |
 
-<details>
-<summary><b>🔍 FoczTrek: architecture and v2 rebuild</b> (click to expand)</summary>
-<br>
+`Python` `LangGraph` `LiteLLM` `Qdrant` `Gemini embeddings` `MCP` `FastAPI` `Langfuse` `Ragas` `DeepEval` `TruLens`
 
-Started during a research internship with **Duke University (Dr. Eric Fouh)**, then rebuilt in 2026:
+---
 
-| | v1 (2024–25) | v2 (2026) |
+### 🗂️ Other projects
+
+| Project | What it is | Stack |
 |---|---|---|
-| Screens | 20 duplicated screens | 9 Expo Router routes built from 20 reusable components |
-| Screen code | 2,867 lines | 549 lines (**−81%**) |
-| State | Passed screen to screen | React Context + `useReducer`, saved with AsyncStorage |
-| Gamification | Visual progress only | Points, daily streaks, ranks |
-| Web bundle | 1,579 KB JS | 983 KB JS (**−38%**) |
-| Tests | 1 | 38 (Jest + React Native Testing Library) |
-
-<p>
-  <img src="https://raw.githubusercontent.com/abhi-1006/FoczTrek/main/docs/screenshots/matrix.jpg" width="190" alt="Eisenhower matrix screen" />
-  <img src="https://raw.githubusercontent.com/abhi-1006/FoczTrek/main/docs/screenshots/focus.jpg" width="190" alt="Focus timer screen" />
-  <img src="https://raw.githubusercontent.com/abhi-1006/FoczTrek/main/docs/screenshots/complete.jpg" width="190" alt="Session complete screen" />
-</p>
-
-</details>
+| 🏔️ [**FoczTrek**](https://github.com/abhi-1006/FoczTrek) · [demo](https://focztrek.vercel.app) | Student productivity app (Eisenhower Matrix planning + Pomodoro focus timers), built during a research internship with **Duke University** (Dr. Eric Fouh), 2024–25 | React Native, Expo, TypeScript |
+| 💡 [**Distraction-Free Study Lamp**](https://github.com/abhi-1006/Distraction-Free-Study-Lamp) | Two Micro:bits over radio: a Pomodoro timer that pauses when a light sensor detects you picked up your phone | MicroPython, Micro:bit |
 
 ---
 
 ### 🛠️ Tech stack
+
+**AI & LLM engineering**
+<p>
+  <img src="https://img.shields.io/badge/LangGraph-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white" alt="LangGraph" />
+  <img src="https://img.shields.io/badge/RAG-6E40C9?style=for-the-badge" alt="RAG" />
+  <img src="https://img.shields.io/badge/Multi--Agent_Systems-0E7490?style=for-the-badge" alt="Multi-Agent Systems" />
+  <img src="https://img.shields.io/badge/Qdrant-DC244C?style=for-the-badge" alt="Qdrant" />
+  <img src="https://img.shields.io/badge/MCP-111111?style=for-the-badge" alt="Model Context Protocol" />
+  <img src="https://img.shields.io/badge/Langfuse-0F172A?style=for-the-badge" alt="Langfuse" />
+  <img src="https://img.shields.io/badge/Prompt_Engineering-B7791F?style=for-the-badge" alt="Prompt Engineering" />
+  <img src="https://img.shields.io/badge/Ragas_·_DeepEval_·_TruLens-4B5563?style=for-the-badge" alt="Ragas, DeepEval, TruLens" />
+</p>
 
 **Languages**
 <p>
@@ -126,35 +105,13 @@ Started during a research internship with **Duke University (Dr. Eric Fouh)**, t
 
 **Frameworks & tools**
 <p>
-  <img src="https://skillicons.dev/icons?i=react,nodejs,fastapi,git,github,vscode,figma&perline=7" alt="React, Node.js, FastAPI, Git, GitHub, VS Code, Figma" />
-</p>
-
-**AI & LLM engineering**
-<p>
-  <img src="https://img.shields.io/badge/LangGraph-1C3C3C?style=flat-square&logo=langchain&logoColor=white" alt="LangGraph" />
-  <img src="https://img.shields.io/badge/RAG-6E40C9?style=flat-square" alt="RAG" />
-  <img src="https://img.shields.io/badge/Multi--Agent_Systems-0E7490?style=flat-square" alt="Multi-Agent Systems" />
-  <img src="https://img.shields.io/badge/Qdrant-DC244C?style=flat-square" alt="Qdrant" />
-  <img src="https://img.shields.io/badge/MCP-111111?style=flat-square" alt="Model Context Protocol" />
-  <img src="https://img.shields.io/badge/Langfuse-0F172A?style=flat-square" alt="Langfuse" />
-  <img src="https://img.shields.io/badge/Ragas_·_DeepEval_·_TruLens-4B5563?style=flat-square" alt="Ragas, DeepEval, TruLens" />
-</p>
-
-**Mobile & web**
-<p>
-  <img src="https://img.shields.io/badge/React_Native-20232A?style=flat-square&logo=react&logoColor=61DAFB" alt="React Native" />
-  <img src="https://img.shields.io/badge/Expo-000020?style=flat-square&logo=expo&logoColor=white" alt="Expo" />
-  <img src="https://img.shields.io/badge/Expo_Router-4630EB?style=flat-square&logo=expo&logoColor=white" alt="Expo Router" />
-  <img src="https://img.shields.io/badge/Jest-C21325?style=flat-square&logo=jest&logoColor=white" alt="Jest" />
-  <img src="https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white" alt="Vercel" />
+  <img src="https://skillicons.dev/icons?i=fastapi,react,nodejs,git,github,vscode,figma&perline=7" alt="FastAPI, React, Node.js, Git, GitHub, VS Code, Figma" />
 </p>
 
 ---
 
 <p align="center">
-  <i>Open to software engineering and AI internships. Let's talk!</i><br><br>
-  <a href="https://abhiram-aedunoothala.vercel.app">Website</a> ·
+  <i>Open to AI engineering and software engineering internships. Let's talk!</i><br><br>
   <a href="https://www.linkedin.com/in/abhiram-aedunoothala">LinkedIn</a> ·
-  <a href="mailto:avsabhiram1006@gmail.com">Email</a> ·
-  <a href="https://focztrek.vercel.app">FoczTrek demo</a>
+  <a href="mailto:avsabhiram1006@gmail.com">Email</a>
 </p>
