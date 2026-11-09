@@ -1,7 +1,7 @@
 <h1 align="center">Hi, I'm Abhiram Aedunoothala 👋</h1>
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1200&color=F7B731&center=true&vCenter=true&width=640&lines=AI+engineering+%C2%B7+CS+%40+University+of+Michigan;Building+agentic+systems+with+LangGraph;RAG+%C2%B7+Multi-agent+%C2%B7+LLM+evaluation" alt="Typing intro" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1200&color=F7B731&center=true&vCenter=true&width=640&lines=AI+engineering+%C2%B7+CS+%40+University+of+Michigan;Building+agentic+systems+with+LangGraph;RAG+%C2%B7+Multi-agent+%C2%B7+LLM+evaluation;Deployed+on+Google+Cloud+Run" alt="Typing intro" />
 </p>
 
 <p align="center">
@@ -13,7 +13,7 @@
 
 ### 🧭 About me
 
-- 🤖 I build **agentic AI systems**: LangGraph workflows, hybrid RAG, multi-agent review, and the evaluation and guardrails that make them trustworthy
+- 🤖 I build **agentic AI systems**: LangGraph workflows, hybrid RAG, multi-agent review, and the evaluation, guardrails and tracing that make them trustworthy
 - 🎓 **Computer Science at the University of Michigan** (2026–2029), transferred from Penn State (GPA 3.7, Dean's List, President Walker Award)
 - 📜 Applied AI Professional Certification Program, **IIT Hyderabad** (2026)
 - 🧑‍🏫 Learning Assistant for MATH 110 at Penn State (Jan–May 2026)
@@ -23,9 +23,13 @@
 
 ### 🌟 Spotlight: [WealthPilot](https://github.com/abhi-1006/wealthpilot)
 
-**An AI copilot for SME loan underwriting** · IIT Hyderabad Applied AI capstone · Jun–Aug 2026
+**An AI copilot for SME loan underwriting** · IIT Hyderabad Applied AI capstone · Jun 2026 – present
+
+<a href="https://wealthpilot-972504936573.us-central1.run.app"><img src="https://img.shields.io/badge/Live_demo-Google_Cloud_Run-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white" alt="Live demo on Google Cloud Run" /></a>
 
 WealthPilot parses raw small-business loan applications, scores risk with a tool-calling agent, answers credit-policy questions with cited sources, auto-declines clear failures and pauses every other case for human approval, and has every memo checked by a review committee. In regulated lending, two failures matter most: **using a protected attribute** and **fabricating a policy citation**. The system is built and evaluated to guard against both.
+
+**[Try it live](https://wealthpilot-972504936573.us-central1.run.app):** ask a credit-policy question, calculate a DSCR, or underwrite a sample application. It runs on synthetic data, and the first request after a quiet period can take a minute or more while the server starts.
 
 ```mermaid
 flowchart TB
@@ -44,11 +48,11 @@ flowchart TB
         H --> R["Risk + Compliance reviewers<br/>deterministic checks"]
         R -. revise / escalate .-> H
     end
-    subgraph QA["③ Policy Q&A"]
+    subgraph QA["③ Policy Q&A · live demo"]
         direction LR
         K[Question] --> L["Hybrid RAG<br/>Qdrant + BM25 + rerank"]
         L --> M[Answer with citations]
-        M --> API["FastAPI + guardrails"]
+        M --> API["FastAPI + guardrails<br/>on Google Cloud Run"]
     end
     UW ~~~ CM ~~~ QA
 ```
@@ -59,7 +63,9 @@ flowchart TB
 | **LangGraph workflow** with a real `interrupt()` human gate and a durable SQLite checkpointer | A paused approval is stored on disk, not in memory. Verified by resuming from disk with a fresh connection and graph object |
 | **Multi-agent committee**: LLM analyst + deterministic risk and compliance critics with enforced per-agent write scopes | Critics can't edit the memo they're checking, so the checks stay independent |
 | **MCP server** for credit-bureau data | Tools are exposed through a standard protocol instead of hard-wired calls |
-| **Reliability**: retries with backoff, a fallback path, and a circuit breaker, under seeded fault injection; Langfuse tracing | A failing dependency degrades gracefully instead of crashing, and pipeline runs are traced step by step |
+| **Deployment on Google Cloud Run**: Docker image, API keys in Secret Manager, scale-to-zero, per-visitor and daily rate limits, prompt-injection rejection before any model call | Anyone can try it, and the limits stop a public link from using up the free API quotas |
+| **Per-request tracing** in Langfuse for the live assistant: tokens, latency, tokens/sec and estimated cost for each model call, plus the retrieval step | Cost and latency are measured per request, so slow or expensive steps show up in the trace |
+| **Reliability**: retries with backoff, a fallback path, and a circuit breaker, under seeded fault injection | A failing dependency degrades gracefully instead of crashing |
 | **Evaluation & guardrails**: the program's 20-item golden set, three independent LLM-judge frameworks, and schema, prompt-injection and protected-attribute checks behind FastAPI | Quality is measured, not assumed |
 
 **Results**
@@ -70,8 +76,9 @@ flowchart TB
 | Policy golden set | **19/20** best run, 17–19 across runs (started at 6/20, before fixing bugs in the test data and the scoring) |
 | Faithfulness / groundedness on final-answer items (Ragas, TruLens) | **1.0 / 1.0** |
 | Valid credit-bureau lookups under fault injection | **45% → 85%** with retries; the rest fall back to a flagged record instead of crashing |
+| Typical policy question on the live demo (from Langfuse traces) | **~1,000 input / 115 output tokens, ~$0.0006** at Gemini list price (the demo runs on the free tier) |
 
-`Python` `LangGraph` `LiteLLM` `Qdrant` `Gemini embeddings` `MCP` `FastAPI` `Langfuse` `Ragas` `DeepEval` `TruLens`
+`Python` `LangGraph` `LiteLLM` `Qdrant` `Gemini API` `MCP` `FastAPI` `Docker` `Google Cloud Run` `Langfuse` `Ragas` `DeepEval` `TruLens`
 
 ---
 
@@ -93,9 +100,17 @@ flowchart TB
   <img src="https://img.shields.io/badge/Multi--Agent_Systems-0E7490?style=for-the-badge" alt="Multi-Agent Systems" />
   <img src="https://img.shields.io/badge/Qdrant-DC244C?style=for-the-badge" alt="Qdrant" />
   <img src="https://img.shields.io/badge/MCP-111111?style=for-the-badge" alt="Model Context Protocol" />
+  <img src="https://img.shields.io/badge/Gemini_API-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white" alt="Gemini API" />
   <img src="https://img.shields.io/badge/Langfuse-0F172A?style=for-the-badge" alt="Langfuse" />
   <img src="https://img.shields.io/badge/Prompt_Engineering-B7791F?style=for-the-badge" alt="Prompt Engineering" />
   <img src="https://img.shields.io/badge/Ragas_·_DeepEval_·_TruLens-4B5563?style=for-the-badge" alt="Ragas, DeepEval, TruLens" />
+</p>
+
+**Cloud & deployment**
+<p>
+  <img src="https://img.shields.io/badge/Google_Cloud_Run-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white" alt="Google Cloud Run" />
+  <img src="https://img.shields.io/badge/Secret_Manager-34A853?style=for-the-badge&logo=googlecloud&logoColor=white" alt="Secret Manager" />
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
 </p>
 
 **Languages**
